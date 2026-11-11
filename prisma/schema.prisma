@@ -49,12 +49,12 @@ model User {
 model Product {
   id                String       @id @default(cuid())
   name              String
-  description       String?
   sku               String
-  price             Decimal      @default(0.00) @db.Decimal(10, 2)
-  quantity          Int          @default(0)
+  description       String?
+  quantityOnHand    Int          @default(0)
+  costPrice         Decimal?     @db.Decimal(10, 2)
+  sellingPrice      Decimal?     @db.Decimal(10, 2)
   lowStockThreshold Int?         @default(10)
-  category          String?
   organizationId    String
   organization      Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt         DateTime     @default(now())
