@@ -342,16 +342,20 @@ export default function ProductsPage() {
         <div className="relative flex-1 max-w-md">
           <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
           <input
+            id="product-search"
             type="text"
+            aria-label="Search by product name or SKU"
             placeholder="Search by product name or SKU..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-zinc-200 pl-9 pr-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-lg border border-zinc-200 pl-9 pr-8 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
           {search && (
             <button
+              type="button"
+              aria-label="Clear search query"
               onClick={() => setSearch("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 text-xs"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 text-xs p-1"
             >
               ✕
             </button>
@@ -592,11 +596,16 @@ export default function ProductsPage() {
 
       {/* Add Product Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="add-product-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4"
+        >
           <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl border border-zinc-200">
             <div className="flex justify-between items-center pb-4 border-b border-zinc-100">
               <div>
-                <h2 className="text-lg font-bold text-zinc-900">
+                <h2 id="add-product-title" className="text-lg font-bold text-zinc-900">
                   Add New Product
                 </h2>
                 <p className="text-xs text-zinc-500 mt-0.5">
@@ -604,6 +613,8 @@ export default function ProductsPage() {
                 </p>
               </div>
               <button
+                type="button"
+                aria-label="Close dialog"
                 onClick={() => setShowAddModal(false)}
                 className="text-zinc-400 hover:text-zinc-600 rounded-md p-1"
               >
@@ -619,10 +630,11 @@ export default function ProductsPage() {
 
             <form onSubmit={handleAddProduct} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="add-product-name" className="block text-xs font-semibold text-zinc-700">
                   Product Name *
                 </label>
                 <input
+                  id="add-product-name"
                   type="text"
                   required
                   value={formName}
@@ -633,10 +645,11 @@ export default function ProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="add-product-sku" className="block text-xs font-semibold text-zinc-700">
                   SKU (Unique within organization) *
                 </label>
                 <input
+                  id="add-product-sku"
                   type="text"
                   required
                   value={formSku}
@@ -648,10 +661,11 @@ export default function ProductsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="add-product-quantity" className="block text-xs font-semibold text-zinc-700">
                     Quantity on Hand *
                   </label>
                   <input
+                    id="add-product-quantity"
                     type="number"
                     min="0"
                     required
@@ -661,10 +675,11 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="add-product-threshold" className="block text-xs font-semibold text-zinc-700">
                     Low Stock Threshold
                   </label>
                   <input
+                    id="add-product-threshold"
                     type="number"
                     min="0"
                     value={formThreshold}
@@ -677,10 +692,11 @@ export default function ProductsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="add-product-selling-price" className="block text-xs font-semibold text-zinc-700">
                     Selling Price ($)
                   </label>
                   <input
+                    id="add-product-selling-price"
                     type="number"
                     step="0.01"
                     min="0"
@@ -691,10 +707,11 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="add-product-cost-price" className="block text-xs font-semibold text-zinc-700">
                     Cost Price ($)
                   </label>
                   <input
+                    id="add-product-cost-price"
                     type="number"
                     step="0.01"
                     min="0"
@@ -707,10 +724,11 @@ export default function ProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="add-product-description" className="block text-xs font-semibold text-zinc-700">
                   Description
                 </label>
                 <textarea
+                  id="add-product-description"
                   rows={2}
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
@@ -742,11 +760,16 @@ export default function ProductsPage() {
 
       {/* Edit Product Modal */}
       {editingProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="edit-product-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4"
+        >
           <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl border border-zinc-200">
             <div className="flex justify-between items-center pb-4 border-b border-zinc-100">
               <div>
-                <h2 className="text-lg font-bold text-zinc-900">
+                <h2 id="edit-product-title" className="text-lg font-bold text-zinc-900">
                   Edit Product
                 </h2>
                 <p className="text-xs text-zinc-500 mt-0.5">
@@ -754,6 +777,8 @@ export default function ProductsPage() {
                 </p>
               </div>
               <button
+                type="button"
+                aria-label="Close dialog"
                 onClick={() => setEditingProduct(null)}
                 className="text-zinc-400 hover:text-zinc-600 rounded-md p-1"
               >
@@ -769,10 +794,11 @@ export default function ProductsPage() {
 
             <form onSubmit={handleUpdateProduct} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="edit-product-name" className="block text-xs font-semibold text-zinc-700">
                   Product Name *
                 </label>
                 <input
+                  id="edit-product-name"
                   type="text"
                   required
                   value={formName}
@@ -782,10 +808,11 @@ export default function ProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="edit-product-sku" className="block text-xs font-semibold text-zinc-700">
                   SKU (Unique within organization) *
                 </label>
                 <input
+                  id="edit-product-sku"
                   type="text"
                   required
                   value={formSku}
@@ -796,10 +823,11 @@ export default function ProductsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="edit-product-quantity" className="block text-xs font-semibold text-zinc-700">
                     Quantity on Hand *
                   </label>
                   <input
+                    id="edit-product-quantity"
                     type="number"
                     min="0"
                     required
@@ -809,10 +837,11 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="edit-product-threshold" className="block text-xs font-semibold text-zinc-700">
                     Low Stock Threshold
                   </label>
                   <input
+                    id="edit-product-threshold"
                     type="number"
                     min="0"
                     value={formThreshold}
@@ -824,10 +853,11 @@ export default function ProductsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="edit-product-selling-price" className="block text-xs font-semibold text-zinc-700">
                     Selling Price ($)
                   </label>
                   <input
+                    id="edit-product-selling-price"
                     type="number"
                     step="0.01"
                     min="0"
@@ -837,10 +867,11 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700">
+                  <label htmlFor="edit-product-cost-price" className="block text-xs font-semibold text-zinc-700">
                     Cost Price ($)
                   </label>
                   <input
+                    id="edit-product-cost-price"
                     type="number"
                     step="0.01"
                     min="0"
@@ -852,10 +883,11 @@ export default function ProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-700">
+                <label htmlFor="edit-product-description" className="block text-xs font-semibold text-zinc-700">
                   Description
                 </label>
                 <textarea
+                  id="edit-product-description"
                   rows={2}
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
@@ -886,14 +918,19 @@ export default function ProductsPage() {
 
       {/* Delete Confirmation Dialog */}
       {deletingProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-product-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4"
+        >
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-zinc-200">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-50 text-rose-600">
                 <TrashIcon className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-zinc-900">
+                <h3 id="delete-product-title" className="text-base font-bold text-zinc-900">
                   Delete Product
                 </h3>
                 <p className="text-xs text-zinc-500 mt-0.5">

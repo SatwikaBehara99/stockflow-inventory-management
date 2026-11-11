@@ -169,36 +169,36 @@ export default function SettingsPage() {
 
         <div className="p-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
-            <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               Organization Name
-            </label>
+            </span>
             <p className="mt-1.5 text-base font-bold text-zinc-900">
               {data?.organization.name}
             </p>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               Organization Slug / Key
-            </label>
+            </span>
             <p className="mt-1.5 font-mono text-xs text-zinc-700 bg-zinc-100 inline-block px-2 py-1 rounded">
               {data?.organization.slug || "default"}
             </p>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               Unique Tenant Identifier (ID)
-            </label>
+            </span>
             <p className="mt-1.5 font-mono text-xs text-zinc-600 truncate bg-zinc-50 p-2 rounded border border-zinc-200">
               {data?.organization.id}
             </p>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <span className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               Registered Since
-            </label>
+            </span>
             <p className="mt-1.5 text-xs text-zinc-700">
               {data?.organization.createdAt
                 ? new Date(data.organization.createdAt).toLocaleDateString(
@@ -223,10 +223,11 @@ export default function SettingsPage() {
         <form onSubmit={handleSaveSettings} className="p-6 space-y-5">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div>
-              <label className="block text-xs font-semibold text-zinc-700">
+              <label htmlFor="settings-threshold" className="block text-xs font-semibold text-zinc-700">
                 Default Low-Stock Threshold
               </label>
               <input
+                id="settings-threshold"
                 type="number"
                 min="0"
                 required
@@ -240,10 +241,11 @@ export default function SettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-zinc-700">
+              <label htmlFor="settings-currency" className="block text-xs font-semibold text-zinc-700">
                 Operating Currency
               </label>
               <select
+                id="settings-currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
                 className="mt-1.5 block w-full rounded-lg border border-zinc-300 px-3.5 py-2 text-sm text-zinc-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -258,10 +260,11 @@ export default function SettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-zinc-700">
+              <label htmlFor="settings-timezone" className="block text-xs font-semibold text-zinc-700">
                 Time Zone
               </label>
               <select
+                id="settings-timezone"
                 value={timeZone}
                 onChange={(e) => setTimeZone(e.target.value)}
                 className="mt-1.5 block w-full rounded-lg border border-zinc-300 px-3.5 py-2 text-sm text-zinc-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"

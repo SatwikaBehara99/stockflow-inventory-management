@@ -165,6 +165,8 @@ function SidebarContent({
             </div>
           </div>
           <button
+            type="button"
+            aria-label="Sign out"
             onClick={onLogout}
             disabled={loggingOut}
             title="Sign out"
@@ -226,6 +228,7 @@ export function DashboardSidebar({ user, children }: DashboardSidebarProps) {
         </Link>
         <button
           type="button"
+          aria-label="Open mobile navigation menu"
           onClick={() => setMobileOpen(true)}
           className="rounded-lg p-1.5 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 focus:outline-none"
         >
@@ -235,10 +238,11 @@ export function DashboardSidebar({ user, children }: DashboardSidebarProps) {
 
       {/* Mobile Drawer (Slide-out) */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 flex md:hidden">
+        <div className="fixed inset-0 z-50 flex md:hidden" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+            aria-hidden="true"
             onClick={() => setMobileOpen(false)}
           />
           {/* Drawer Pane */}
@@ -246,6 +250,7 @@ export function DashboardSidebar({ user, children }: DashboardSidebarProps) {
             <div className="absolute right-0 top-0 -mr-12 pt-3">
               <button
                 type="button"
+                aria-label="Close navigation menu"
                 onClick={() => setMobileOpen(false)}
                 className="flex h-10 w-10 items-center justify-center rounded-full text-white hover:bg-white/10"
               >
